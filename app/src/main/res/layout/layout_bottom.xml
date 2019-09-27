@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="130dp"
-    android:id="@+id/layout_bottom">
+    android:id="@+id/fl_bottom_layout">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/ll_content"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:layout_height="100dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="title" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="title"
-                android:gravity="center"
-                android:background="@color/colorPrimary"/>
+        </FrameLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1000dp"/>
 
-        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_header"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/shape_header_bg"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1000dp" />
 
-    </FrameLayout>
+    </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    <ImageView
+        android:id="@+id/iv_header"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/header" />
+
+</FrameLayout>

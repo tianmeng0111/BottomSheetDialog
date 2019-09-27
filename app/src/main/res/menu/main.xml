@@ -8,4 +8,10 @@
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_to_third"
+        android:title="CustomBehavior"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="never" />
+
 </menu>

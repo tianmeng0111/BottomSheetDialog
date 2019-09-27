@@ -1,4 +1,4 @@
-package com.tm.bottomsheet.bottomsheetdemo;
+package com.tm.bottomsheet.bottomsheetdemo.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.tm.bottomsheet.bottomsheetdemo.R;
 import com.tm.bottomsheet.bottomsheetdemo.utils.DensityUtils;
 
 public class Main2Activity extends AppCompatActivity {
@@ -50,7 +52,7 @@ public class Main2Activity extends AppCompatActivity {
 
             @Override
             public void onSlide(@NonNull View view, float v) {
-                Log.e(TAG, "onSlide: --->>" + v);
+//                Log.e(TAG, "onSlide: --->>" + v);
                 ivHeader.setAlpha(1 - v);
                 if (v > 0.95) {
                     ivHeader.setVisibility(View.GONE);
@@ -72,5 +74,12 @@ public class Main2Activity extends AppCompatActivity {
 
     private ViewGroup.MarginLayoutParams getMarginLayoutParams(View view) {
         return (ViewGroup.MarginLayoutParams) (view.getLayoutParams());
+    }
+
+    private void setMarginTop(View view, int marginTop) {
+        Log.e(TAG, "setMarginTop: ----->>" + marginTop);
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
+        lp.topMargin = marginTop;
+        view.setLayoutParams(lp);
     }
 }

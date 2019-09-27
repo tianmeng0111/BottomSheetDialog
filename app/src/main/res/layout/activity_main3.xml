@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Main2Activity">
+    tools:context=".activity.Main3Activity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         app:title="@string/app_name"
         app:titleTextColor="@color/white"
         app:theme="@style/ToolbarTheme"
         android:background="@color/colorPrimary" />
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        app:behavior_hideable="false"
+        app:layout_behavior="com.tm.bottomsheet.bottomsheetdemo.behavior.MyBehavior"
+        app:behavior_hideable="true"
         app:behavior_peekHeight="130dp"
-        android:id="@+id/layout_bottom">
+        app:min_offset="15dp">
 
         <include layout="@layout/layout_bottom"/>
 

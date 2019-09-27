@@ -1,4 +1,4 @@
-package com.tm.bottomsheet.bottomsheetdemo;
+package com.tm.bottomsheet.bottomsheetdemo.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,25 +6,20 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Display;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.tm.bottomsheet.bottomsheetdemo.utils.DensityUtils;
+import com.tm.bottomsheet.bottomsheetdemo.BottomFragment;
+import com.tm.bottomsheet.bottomsheetdemo.LvAdapter;
+import com.tm.bottomsheet.bottomsheetdemo.MyBottomSheetDialog;
+import com.tm.bottomsheet.bottomsheetdemo.R;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.os.Build.VERSION_CODES.M;
@@ -42,16 +37,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if(Build.VERSION.SDK_INT >= LOLLIPOP) {
-            int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;;
+            int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
-
-            if(Build.VERSION.SDK_INT >= M) {
-//                uiFlags = setStatusBarDarkFont(uiFlags);
-
-            }
             getWindow().getDecorView().setSystemUiVisibility(uiFlags);
         }
 
@@ -66,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.menu_to_second:
                             startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                            return true;
+                        case R.id.menu_to_third:
+                            startActivity(new Intent(MainActivity.this, Main3Activity.class));
                             return true;
                     }
                     return false;
