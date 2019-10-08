@@ -23,7 +23,7 @@
         app:behavior_peekHeight="130dp"
         app:min_offset="15dp">
 
-        <include layout="@layout/layout_bottom"/>
+        <include layout="@layout/layout_bottom3"/>
 
     </android.support.v4.widget.NestedScrollView>
 

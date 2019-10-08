@@ -28,6 +28,8 @@ import java.util.Vector;
 
 public class MyBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
 
+    private static final String TAG = "MyBehavior";
+
     /**
      * Callback for monitoring events about bottom sheets.
      */
@@ -309,7 +311,7 @@ public class MyBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
         // The ViewDragHelper tries to capture only the top-most View. We have to explicitly tell it
         // to capture the bottom sheet in case it is not captured and the touch slop is passed.
         if ( action == MotionEvent.ACTION_MOVE  &&  ! mIgnoreEvents ) {
-            if ( Math.abs(mInitialY - event.getY()) > mViewDragHelper.getTouchSlop() ) {
+            if ( Math.abs((float) mInitialY - event.getY()) > (float) mViewDragHelper.getTouchSlop() ) {
                 mViewDragHelper.captureChildView( child, event.getPointerId(event.getActionIndex()) );
             }
         }

@@ -12,14 +12,26 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="title" >
+            android:layout_height="wrap_content">
 
-        </TextView>
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="title"
+                android:textSize="20sp"/>
+
+        </FrameLayout>
 
         <com.tm.bottomsheet.bottomsheetdemo.NoScrollListView
             android:id="@+id/lv"

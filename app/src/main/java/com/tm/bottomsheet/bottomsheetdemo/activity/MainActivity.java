@@ -172,9 +172,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//没有用
-            bottomSheetDialog.getWindow().setNavigationBarColor(getResources().getColor(R.color.white));
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//没有用
+//            bottomSheetDialog.getWindow().setNavigationBarColor(getResources().getColor(R.color.white));
+//        }
 
         bottomSheetDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

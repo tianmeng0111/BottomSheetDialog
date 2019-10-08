@@ -1,5 +1,6 @@
 package com.tm.bottomsheet.bottomsheetdemo.activity;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,14 +11,25 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.tm.bottomsheet.bottomsheetdemo.R;
 import com.tm.bottomsheet.bottomsheetdemo.behavior.MyBehavior;
 import com.tm.bottomsheet.bottomsheetdemo.utils.DensityUtils;
 import com.tm.bottomsheet.bottomsheetdemo.utils.ScreenUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
@@ -28,6 +40,11 @@ public class Main3Activity extends AppCompatActivity {
     private NestedScrollView nestedScrollView;
     private FrameLayout flBottomLayout;
     private ImageView ivHeader;
+    private ImageView ivBg;
+    private TextView tvTitle;
+
+    private ListView lv;
+    private List<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +64,45 @@ public class Main3Activity extends AppCompatActivity {
         flBottomLayout = findViewById(R.id.fl_bottom_layout);
         ivHeader = findViewById(R.id.iv_header);
 
-        MyBehavior behavior = MyBehavior.from(nestedScrollView);
-        behavior.setAnchorPoint((ScreenUtils.getScreenHeight(Main3Activity.this)
-                - ScreenUtils.getStatusHeight(Main3Activity.this)
-                - DensityUtils.dp2px(Main3Activity.this, 48)) / 2);
-        behavior.setState(MyBehavior.STATE_COLLAPSED);
+        lv = findViewById(R.id.lv);
+        setData();
+        ivBg = findViewById(R.id.iv_bg);
+        tvTitle = findViewById(R.id.tv_title);
+
+        final MyBehavior behavior = MyBehavior.from(nestedScrollView);
+//        behavior.setAnchorPoint(
+//                (ScreenUtils.getScreenHeight(Main3Activity.this)
+//                - ScreenUtils.getStatusHeight(Main3Activity.this)
+//                - DensityUtils.dp2px(Main3Activity.this, 48)) / 2);
+        ivBg.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                behavior.setAnchorPoint(
+                        ScreenUtils.getScreenHeight(Main3Activity.this)
+                        - DensityUtils.dp2px(Main3Activity.this, 30) //半个头像高度
+                        - ScreenUtils.getStatusHeight(Main3Activity.this)
+                        - ivBg.getMeasuredHeight());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    ivBg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
+
         behavior.addBottomSheetCallback(new MyBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == MyBehavior.STATE_EXPANDED) {
-//                    ivHeader.setVisibility(View.GONE);
+//                if (newState == MyBehavior.STATE_EXPANDED) {
+//                    Log.e(TAG, "onStateChanged: ---------STATE_EXPANDED");
+//                } else if (newState == MyBehavior.STATE_ANCHOR_POINT){
+//                    Log.e(TAG, "onStateChanged: ---------STATE_ANCHOR_POINT");
+//                }
 
-//                    setMarginTop(ivHeader, DensityUtils.dp2px(Main3Activity.this, 50));
-                } else if (newState == MyBehavior.STATE_ANCHOR_POINT){
-//                    ivHeader.setVisibility(View.VISIBLE);
-
-//                    setMarginTop(ivHeader, 0);
-                }
+//                if (newState == MyBehavior.STATE_COLLAPSED) {
+//                    Log.e(TAG, "onStateChanged: ---------STATE_COLLAPSED");
+//                    tvTitle.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                } else {
+//                    tvTitle.setBackgroundColor(Color.TRANSPARENT);
+//                }
             }
 
             @Override
@@ -87,7 +126,18 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
 
+        behavior.setState(MyBehavior.STATE_COLLAPSED);
+//        tvTitle.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
 //        SwipeDismissBehavior
+    }
+
+    private void setData() {
+        list = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            list.add(i + "");
+        }
+        lv.setAdapter(new ArrayAdapter<String>(Main3Activity.this, R.layout.support_simple_spinner_dropdown_item, list));
     }
 
     private ViewGroup.MarginLayoutParams getMarginLayoutParams(View view) {
@@ -101,7 +151,7 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     private void setMarginLeft(View view, int marginLeft) {
-        Log.e(TAG, "setMarginTop: ----->>" + marginLeft);
+//        Log.e(TAG, "setMarginTop: ----->>" + marginLeft);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
         lp.leftMargin = marginLeft;
         view.setLayoutParams(lp);
