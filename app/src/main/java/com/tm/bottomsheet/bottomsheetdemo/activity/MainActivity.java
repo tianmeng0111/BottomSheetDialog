@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomSheetDialog() {
         //当这个Dilaog打开再关闭后，无法用Dialog.show()再次打开，重新创建一个
         final BottomSheetDialog bottomSheetDialog  = new MyBottomSheetDialog(this);
+        bottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         View view = View.inflate(this, R.layout.dialog_fragment_list, null);
         ListView lv = view.findViewById(R.id.lv);
         lv.setAdapter(new LvAdapter(MainActivity.this));
@@ -114,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomSheetDialog1() {
         //当这个Dilaog打开再关闭后，无法用Dialog.show()再次打开，重新创建一个
         final BottomSheetDialog bottomSheetDialog  = new MyBottomSheetDialog(this);
+        bottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
         View view = View.inflate(this, R.layout.dialog_corners, null);
         ListView lv = view.findViewById(R.id.lv);
         LvAdapter adapter = new LvAdapter(MainActivity.this);
@@ -140,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBottomSheetDialogTransparent() {
         //当这个Dilaog打开再关闭后，无法用Dialog.show()再次打开，重新创建一个
-        final BottomSheetDialog bottomSheetDialog  = new MyBottomSheetDialog(this, R.style.TransBottomSheetDialogStyle);
+        final BottomSheetDialog bottomSheetDialog  = new BottomSheetDialog(this, R.style.TransBottomSheetDialogStyle);
+
         View view = View.inflate(this, R.layout.dialog_single, null);
         View cancel = view.findViewById(R.id.tv_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {

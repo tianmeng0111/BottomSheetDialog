@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -42,6 +43,7 @@ public class Main3Activity extends AppCompatActivity {
     private ImageView ivHeader;
     private ImageView ivBg;
     private TextView tvTitle;
+    private LinearLayout llContent;
 
     private ListView lv;
     private List<String> list;
@@ -65,9 +67,10 @@ public class Main3Activity extends AppCompatActivity {
         ivHeader = findViewById(R.id.iv_header);
 
         lv = findViewById(R.id.lv);
-        setData();
+
         ivBg = findViewById(R.id.iv_bg);
         tvTitle = findViewById(R.id.tv_title);
+        llContent = findViewById(R.id.ll_content);
 
         final MyBehavior behavior = MyBehavior.from(nestedScrollView);
 //        behavior.setAnchorPoint(
@@ -91,11 +94,13 @@ public class Main3Activity extends AppCompatActivity {
         behavior.addBottomSheetCallback(new MyBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//                if (newState == MyBehavior.STATE_EXPANDED) {
+                if (newState == MyBehavior.STATE_EXPANDED) {
 //                    Log.e(TAG, "onStateChanged: ---------STATE_EXPANDED");
-//                } else if (newState == MyBehavior.STATE_ANCHOR_POINT){
+                    setMarginTop(llContent, 0);
+                } else if (newState == MyBehavior.STATE_ANCHOR_POINT){
 //                    Log.e(TAG, "onStateChanged: ---------STATE_ANCHOR_POINT");
-//                }
+                    setMarginTop(llContent, DensityUtils.dp2px(Main3Activity.this, 30));
+                }
 
 //                if (newState == MyBehavior.STATE_COLLAPSED) {
 //                    Log.e(TAG, "onStateChanged: ---------STATE_COLLAPSED");
@@ -115,21 +120,38 @@ public class Main3Activity extends AppCompatActivity {
 //                ivHeader.requestLayout();
 //                getMarginLayoutParams(ivHeader).leftMargin = (int) (slideOffset * DensityUtils.dp2px(Main3Activity.this, 30) / -0.5);
                 if (slideOffset > 0.5) {
-                    setMarginTop(ivHeader, (int) ((slideOffset - 0.5) * DensityUtils.dp2px(Main3Activity.this, 100)));
+                    setMarginTop(ivHeader, (int) ((slideOffset - 0.5) * DensityUtils.dp2px(Main3Activity.this, 30)));
                     setMarginLeft(ivHeader, (int) (
                             (slideOffset - 0.5) *
                                     (DensityUtils.dp2px(Main3Activity.this, 20) - DensityUtils.dp2px(Main3Activity.this, 50))
                                     / (1 - 0.5) +
                                     DensityUtils.dp2px(Main3Activity.this, 50)
                     ));
+
+                    int dp30 = DensityUtils.dp2px(Main3Activity.this, 30);
+//                    Log.e(TAG, "onSlide: " + slideOffset + "----->>" + ( ((slideOffset - 0.5 )* -dp30 / (1-0.5)) + dp30) );
+                    setMarginTop(llContent, (int) ( ((slideOffset - 0.5 )* -dp30 / (1-0.5)) + dp30) );
+                } else {
+//                    if (getMarginLayoutParams(llContent).topMargin != DensityUtils.dp2px(Main3Activity.this, 30)) {
+//                        setMarginTop(llContent, DensityUtils.dp2px(Main3Activity.this, 30));
+//                    }
                 }
+
+//                if (slideOffset > 0.95) {
+//                    getMarginLayoutParams(llContent).topMargin = 0;
+//                    llContent.requestLayout();
+//                } else {
+//                    getMarginLayoutParams(llContent).topMargin = DensityUtils.dp2px(Main3Activity.this, 30);
+//                    llContent.requestLayout();
+//                }
             }
         });
 
         behavior.setState(MyBehavior.STATE_COLLAPSED);
 //        tvTitle.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-//        SwipeDismissBehavior
+
+//        setData();
     }
 
     private void setData() {

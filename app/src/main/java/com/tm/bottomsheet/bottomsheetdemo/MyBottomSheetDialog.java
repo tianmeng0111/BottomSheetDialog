@@ -37,9 +37,9 @@ public class MyBottomSheetDialog extends BottomSheetDialog {
         int screenHeight = ScreenUtils.getScreenHeight(getContext());
 //        int statusBarHeight = getStatusBarHeight(getContext());
         //这里不知道为什么 需要48dp
-        int statusBarHeight = ScreenUtils.getStatusHeight(getContext()) - DensityUtils.dp2px(getContext(), 48);
-        int dialogHeight = screenHeight - statusBarHeight;
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, dialogHeight == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : dialogHeight);
+//        int statusBarHeight = ScreenUtils.getStatusHeight(getContext()) - DensityUtils.dp2px(getContext(), 48);
+//        int dialogHeight = screenHeight - statusBarHeight;
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, screenHeight == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : screenHeight);
         getWindow().setGravity(Gravity.TOP);
     }
 

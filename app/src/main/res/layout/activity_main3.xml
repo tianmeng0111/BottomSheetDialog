@@ -21,7 +21,7 @@
         app:layout_behavior="com.tm.bottomsheet.bottomsheetdemo.behavior.MyBehavior"
         app:behavior_hideable="true"
         app:behavior_peekHeight="130dp"
-        app:min_offset="15dp">
+        app:min_offset="48dp" >
 
         <include layout="@layout/layout_bottom3"/>
 
